@@ -6,26 +6,39 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server",
-    "start-dev": "NODE_ENV='development' webpack -w & nodemon server -e html,js,scss --igonore public --ignore client"
+    "start-dev": "NODE_ENV='development' webpack -w & nodemon server -e html,js,scss --igonore public --ignore client",
+    "seed": "node script/seed.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/polyfill": "^7.8.3",
     "@babel/preset-env": "^7.8.4",
+    "axios": "^0.19.2",
     "body-parser": "^1.19.0",
+    "connect-session-sequelize": "^6.1.1",
     "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "history": "^4.10.1",
     "morgan": "^1.9.1",
     "nodemon": "^2.0.2",
+    "passport": "^0.4.1",
+    "pg": "^7.18.2",
+    "pg-hstore": "^2.3.3",
+    "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "sequelize": "^5.21.5"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
+    "@babel/polyfill": "^7.8.3",
     "@babel/preset-react": "^7.8.3",
     "babel-loader": "^8.0.6",
     "webpack": "^4.41.6",
