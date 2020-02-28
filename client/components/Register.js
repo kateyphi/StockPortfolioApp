@@ -11,7 +11,7 @@ const Register = (props) => {
                     <label htmlFor="nickname">
                         <small>Nickname</small>
                     </label>
-                    <input name="name" type="text" />
+                    <input name="nickname" type="text" />
                 </div>
                 <div>
                     <label htmlFor="email">
@@ -48,7 +48,7 @@ const mapDispatchToProps = dispatch => {
             const nickname = evt.target.nickname.value
             const email = evt.target.email.value
             const password = evt.target.password.value
-            dispatch(auth(nickname, email,password,formName))
+            dispatch(auth(formName, email,password,nickname))
         }
     }
 }

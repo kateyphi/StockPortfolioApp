@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
-import {Register, SignIn, UserHome} from './components'
+import {Register, SignIn, UserHome, Portfolio} from './components'
 import {me} from './store'
 import PropTypes from 'prop-types'
 
@@ -15,6 +15,7 @@ class Routes extends React.Component {
             <Switch>
                 <Route path="/signin" component={SignIn} />
                 <Route path="/register" component={Register} />
+                <Route path="/portfolio" component={Portfolio} />
                 {isLoggedIn && (
                     <Switch>
                         <Route path="/home" component={UserHome} />

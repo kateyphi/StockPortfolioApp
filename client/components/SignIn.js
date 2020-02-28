@@ -41,7 +41,7 @@ const mapDispatchToProps = dispatch => {
             const formName = evt.target.name
             const email = evt.target.email.value
             const password = evt.target.password.value
-            dispatch(auth(email,password,formName))
+            dispatch(auth(formName, email, password))
         }
     }
 }

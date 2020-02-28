@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-
+import {logout} from '../store/user'
 
 const Navbar = ({handleClick, isLoggedIn, userEmail}) => (
   <div>
@@ -12,8 +12,10 @@ const Navbar = ({handleClick, isLoggedIn, userEmail}) => (
         <Link to="/home">Home</Link>
         <Link to="/signin">Sign In</Link>
         <Link to="/register">Register</Link>
+        <Link to="/buystocks">Buy Stocks</Link>
         <Link to="/transactions">Transactions</Link>
         <Link to="/portfolio">Portfolio</Link>
+        <button type="button" onClick={handleClick}>Log Out</button>
       </div>
     </nav>
     <hr />
@@ -30,9 +32,16 @@ const mapState = state => {
   }
 }
 
+const mapDispatch = dispatch => {
+    return {
+      handleClick() {
+        console.log('logging out...')
+        dispatch(logout())
+      }
+    }
+  }
 
-
-export default connect(mapState)(Navbar)
+export default connect(mapState, mapDispatch)(Navbar)
 
 /**
  * PROP TYPES
