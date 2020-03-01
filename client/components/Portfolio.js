@@ -1,28 +1,61 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import {newOrder} from '../store/order'
 
-/**
- * COMPONENT
- */
-export const Portfolio = props => {
-  const {balance} = props
+class Portfolio extends React.Component {
+    constructor(props){
+        super(props)
+        this.handleSubmit = this.handleSubmit.bind(this)
+    }
 
-  return (
-    <div>
-      <h3>Portfolio: ${balance}</h3>
-    </div>
-  )
+    handleSubmit(evt){
+        evt.preventDefault()
+        const symbol = evt.target.symbol.value
+        const quantity = evt.target.quantity.value
+        const userId = this.props.id
+        this.props.newOrder(symbol, quantity, userId)
+    }
+
+    render(){
+    const {balance} = this.props
+
+        return (
+        <div>
+          <h3>Balance: ${balance}</h3>
+          <form onSubmit={this.handleSubmit} name='buystock'>
+                    <div>
+                        <label htmlFor="symbol">
+                            <small>Ticker Symbol</small>
+                        </label>
+                        <input name="symbol" type="text" />
+                    </div>
+                    <div>
+                        <label htmlFor="quantity">
+                            <small>Quantity</small>
+                        </label>
+                        <input name="quantity" type="number" />
+                    </div>
+                    <div>
+                        <button type="submit">Buy</button>
+                    </div>
+                </form>
+        </div>
+      )
+  }
+
 }
 
-/**
- * CONTAINER
- */
+
 const mapState = state => {
   return {
-    balance: state.user.balance
+    balance: state.user.balance,
+    id: state.user.id
   }
 }
 
-export default connect(mapState)(Portfolio)
+const mapDispatchToProps = dispatch => ({
+    newOrder: (symbol, quantity, userId) => dispatch(newOrder(symbol, quantity, userId))
+  })
+
+export default connect(mapState, mapDispatchToProps)(Portfolio)
 

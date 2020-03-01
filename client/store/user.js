@@ -1,5 +1,11 @@
 import axios from 'axios'
 import history from '../history'
+import IEXCloudClient from 'node-iex-cloud'
+const iex = new IEXCloudClient(axios, {
+    sandbox: true,
+    publishable: "pk_5dc3a0f611cb4f21a53cd9175692a2e2 ",
+    version: "stable"
+  });
 
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
