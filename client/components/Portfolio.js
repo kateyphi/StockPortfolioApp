@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {newOrder} from '../store/order'
+import {newOrder} from '../store'
 
 class Portfolio extends React.Component {
     constructor(props){

@@ -1,20 +1,15 @@
 import axios from 'axios'
 import history from '../history'
-import IEXCloudClient from 'node-iex-cloud'
-const iex = new IEXCloudClient(axios, {
-    sandbox: true,
-    publishable: "pk_5dc3a0f611cb4f21a53cd9175692a2e2 ",
-    version: "stable"
-  });
 
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
+const UPDATE_BALANCE = 'UPDATE_BALANCE'
 
 const defaultUser = {}
 
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
-
+const updatedBalance = amount => ({type: UPDATE_BALANCE, amount})
 
 export const me = () => async dispatch => {
     try {
@@ -51,12 +46,24 @@ export const logout = () => async dispatch => {
     }
 }
 
+export const updateBalance = (userId, amount) => async dispatch => {
+    try {
+        console.log('helloooooo')
+        await axios.post(`/api/users/${userId}/balance`, {amount})
+        dispatch(updatedBalance(amount))
+    } catch (error) {
+        console.error(error)
+    }
+}
+
 export default function(state = defaultUser, action){
     switch (action.type){
         case GET_USER:
             return action.user
         case REMOVE_USER: 
             return defaultUser
+        case UPDATE_BALANCE: 
+            return {...state, balance: state.balance - action.amount}
         default:
             return state
     }
