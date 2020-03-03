@@ -1,9 +1,9 @@
-// alpha vantage key: MX9TIOCVAX69DVCJ 
+const key = 'MX9TIOCVAX69DVCJ'
+const alpha = require('alphavantage')({key})
 
-const fetch = require('node-fetch')
-const axios = require('axios')
-const alpha = require('alphavantage')({key: 'MX9TIOCVAX69DVCJ'})
+let quote = async function(){
+    const butts = await alpha.data.quote('msft')
+    console.log(butts)
+}
 
-alpha.data.quote('msft').then(data=>{
-    console.log(data['Global Quote']['05. price'])
-})
+quote()

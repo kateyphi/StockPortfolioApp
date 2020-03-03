@@ -9,7 +9,7 @@ const defaultUser = {}
 
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
-const updatedBalance = amount => ({type: UPDATE_BALANCE, amount})
+export const updatedBalance = balance => ({type: UPDATE_BALANCE, balance})
 
 export const me = () => async dispatch => {
     try {
@@ -46,11 +46,16 @@ export const logout = () => async dispatch => {
     }
 }
 
-export const updateBalance = (userId, amount) => async dispatch => {
+export const updateBalance = (userId, amount) => async dispatch => { 
     try {
-        console.log('helloooooo')
-        await axios.post(`/api/users/${userId}/balance`, {amount})
-        dispatch(updatedBalance(amount))
+        await axios.put(`/api/users/balance`, {userId, amount})
+    } catch (error) {
+        console.error(error)
+    }
+
+    try {
+        const {data} = await axios.get(`/api/users/${userId}/balance`)
+        dispatch(updatedBalance(data.balance))
     } catch (error) {
         console.error(error)
     }
@@ -63,7 +68,7 @@ export default function(state = defaultUser, action){
         case REMOVE_USER: 
             return defaultUser
         case UPDATE_BALANCE: 
-            return {...state, balance: state.balance - action.amount}
+            return {...state, balance: state.balance}
         default:
             return state
     }
