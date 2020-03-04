@@ -1,7 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {getStocks} from '../store'
-const alpha = require('alphavantage')({key: process.env.API_KEY})
 
 class PortfolioList extends React.Component {
     constructor(props){
@@ -24,21 +23,6 @@ class PortfolioList extends React.Component {
       } else {
         return 'green'
       }
-    }
-
-    async setStocks(){
-      console.log('props stocks', this.props.stocks)
-      let stocks = {}
-      let data = this.props.stocks
-      for (let i=0; i<data.length; i++){
-          stocks[data[i].symbol] ? stocks[data[i].symbol].qty += data[i].quantity : stocks[data[i].symbol] = {qty: data[i].quantity}
-      }
-      for (let key in stocks){
-          let quote = await alpha.data.quote(key)
-          stocks[key]['openPrice'] =  quote['Global Quote']['02. open']
-          stocks[key]['price'] = quote['Global Quote']['05. price']
-      }
-      this.setState({stocks})
     }
 
     getTotal(stocks){
