@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+import {removeOrders, removeStocks, getAllOrders, getStocks} from '../store'
 
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
@@ -30,6 +31,8 @@ export const auth = (method, email, password, nickname) => async dispatch => {
 
     try {
         dispatch(getUser(res.data))
+        dispatch(getAllOrders())
+        dispatch(getStocks())
         history.push('/home')
     } catch (dispatchOrHistoryErr) {
         console.error(dispatchOrHistoryErr)
@@ -40,6 +43,8 @@ export const logout = () => async dispatch => {
     try {
         await axios.post('/auth/logout')
         dispatch(removeUser())
+        dispatch(removeOrders())
+        dispatch(removeStocks())
         history.push('/login')
     } catch (error) {
         console.error(error)
@@ -68,7 +73,7 @@ export default function(state = defaultUser, action){
         case REMOVE_USER: 
             return defaultUser
         case UPDATE_BALANCE: 
-            return {...state, balance: state.balance}
+            return {...state, balance: action.balance}
         default:
             return state
     }

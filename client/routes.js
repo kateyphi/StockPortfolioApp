@@ -1,8 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
-import {Register, SignIn, UserHome, Portfolio, Transactions} from './components'
-import {me} from './store'
+import {Register, SignIn, UserHome, Portfolio, Transactions, Home} from './components'
+import {me, getAllOrders, getStocks} from './store'
 import PropTypes from 'prop-types'
 
 class Routes extends React.Component {
@@ -13,23 +13,25 @@ class Routes extends React.Component {
         const {isLoggedIn} = this.props
         return (
             <Switch>
-                <Route path="/signin" component={SignIn} />
-                <Route path="/register" component={Register} />
-                <Route path="/portfolio" component={Portfolio} />
-                <Route path="/transactions" component={Transactions} />
-                {isLoggedIn && (
+                {isLoggedIn ? (
                     <Switch>
-                        <Route path="/home" component={UserHome} />
+                        <Route exact path="/" component={UserHome} />
+                        <Route path="/portfolio" component={Portfolio} />
+                        <Route path="/transactions" component={Transactions} /> 
+                    </Switch>
+                ) : (
+                    <Switch>
+                        <Route exact path='/' component={Home} />
+                        <Route path="/signin" component={SignIn} />
+                        <Route path="/register" component={Register} />
                     </Switch>
                 )}
-                <Route component={SignIn} />
             </Switch>
         )
     }
 }
 
 const mapStateToProps = state => {
-    console.log('state', state)
     return {
         isLoggedIn: !!state.user.id
     }
@@ -39,7 +41,10 @@ const mapDispatchToProps = dispatch => {
     return {
         loadInitialData(){
             dispatch(me())
-        }
+            dispatch(getAllOrders())
+            dispatch(getStocks())
+        },
+        
     }
 }
 

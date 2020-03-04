@@ -14,16 +14,16 @@ class BuyStocks extends React.Component {
         const symbol = evt.target.symbol.value
         const quantity = evt.target.quantity.value
         const userId = this.props.id
-        this.props.newOrder(symbol, quantity, userId)
-        this.props.history.push('/home')
+        const balance = this.props.balance
+        this.props.newOrder(balance, symbol, quantity, userId)
+        this.props.getStocks()
     }
 
     render(){
     const {balance} = this.props
-
         return (
         <div>
-          <h3>Balance: ${balance}</h3>
+          <h3>Balance: ${Number(balance).toFixed(2)}</h3>
           <form onSubmit={this.handleSubmit} name='buystock'>
                     <div>
                         <label htmlFor="symbol">
@@ -56,8 +56,8 @@ const mapState = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-    newOrder: (symbol, quantity, userId) => dispatch(newOrder(symbol, quantity, userId)),
-    getStocks: (userId) => dispatch(getStocks(userId))
+    newOrder: (balance, symbol, quantity, userId) => dispatch(newOrder(balance, symbol, quantity, userId)),
+    getStocks: () => dispatch(getStocks())
   })
 
 export default withRouter(connect(mapState, mapDispatchToProps)(BuyStocks))

@@ -11,24 +11,21 @@ class Transactions extends React.Component {
         this.props.getAllOrders(this.props.id)
     }
 
-    // Need 'loading'. 
     render(){
         const orders = this.props.order
         console.log(orders)
         return (
         <div>
-          <h3>Transactions Component.</h3>
-          {/* <p>{JSON.stringify(orders)}</p> */}
-            {/* <table>
+          <h3>Transactions</h3>
+            <table>
             {orders.map(x=>(
                 <tr>
                     <td>BUY ({x.symbol.toUpperCase()})</td>
-            <td>{x.quantity} shares</td>
-    <td>{x.createdAt}</td>
+    <td>{x.quantity} shares @ ${x.price} ea.</td>
+    <td>{x.createdAt.slice(0,10)}</td>
                 </tr>
             ))}
-            </table> */}
-            <h2>Yup.</h2>
+            </table>
         </div>
       )
   }

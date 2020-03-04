@@ -41,6 +41,7 @@ router.post('/logout', (req,res,next)=>{
 })
 
 router.get('/me', (req,res)=>{
+    console.log('req', req)
     res.json(req.user)
 })
 

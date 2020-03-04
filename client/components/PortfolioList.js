@@ -5,30 +5,39 @@ import {getStocks} from '../store'
 class PortfolioList extends React.Component {
     constructor(props){
         super(props)
+        this.getColor = this.getColor.bind(this)
     }
 
     componentDidMount(){
-        this.props.getStocks(this.props.id)
-        console.log(this.props)
+        this.props.getStocks()
     }
 
-
+    getColor(stock){
+      let stocks = this.props.stocks
+      if (stocks[stock].price < stocks[stock].openPrice){
+        return 'red'
+      } else if (stocks[stock].price === stocks[stock].openPrice){
+        return 'grey'
+      } else {
+        return 'green'
+      }
+    }
 
     render(){
-    this.props.getStocks(this.props.id)
         return (
+        this.props.stocks ? (
         <div>
-          <h3>Portfolio (${this.props.stocks.total})</h3>
+          <h3>Portfolio (${this.props.stocks.total.toFixed(2)})</h3>
           <table>
-          {Object.keys(this.props.stocks).map(x=>(
+          {Object.keys(this.props.stocks).slice(0,-1).map(x=>(
               <tr>
-                  <td>{x.toUpperCase()}</td>
+                  <td id={`stock-${this.getColor(x)}`}>{x.toUpperCase()}</td>
                   <td>{this.props.stocks[x].qty} Shares</td>
-                  <td>${this.props.stocks[x].price*this.props.stocks[x].qty}</td>
+                  <td>${(this.props.stocks[x].price*this.props.stocks[x].qty).toFixed(2)}</td>
               </tr>
           ))}
           </table>
-        </div>
+        </div> ) : (<div></div>)
       )
   }
 
@@ -43,7 +52,7 @@ const mapState = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-    getStocks: (userId) => dispatch(getStocks(userId))
+    getStocks: () => dispatch(getStocks())
   })
 
 export default connect(mapState, mapDispatchToProps)(PortfolioList)

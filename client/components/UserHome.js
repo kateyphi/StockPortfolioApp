@@ -1,18 +1,29 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import {me, getAllOrders, getStocks} from '../store'
 
 /**
  * COMPONENT
  */
-export const UserHome = props => {
-  const {nickname} = props
+class UserHome extends React.Component{
+  constructor(props){
+    super(props)
+  }
+  componentDidMount(){
+    this.props.loadInitialData()
+  }
 
-  return (
+  render(){
+    const {nickname} = this.props
+    return (   
     <div>
       <h3>Welcome, {nickname}</h3>
     </div>
-  )
+)
+  }
+
+
 }
 
 /**
@@ -24,7 +35,17 @@ const mapState = state => {
   }
 }
 
-export default connect(mapState)(UserHome)
+const mapDispatchToProps = dispatch => {
+  return {
+      loadInitialData(){
+          dispatch(me())
+          dispatch(getAllOrders())
+          dispatch(getStocks())
+      },
+      
+  }
+}
+export default connect(mapState, mapDispatchToProps)(UserHome)
 
 /**
  * PROP TYPES

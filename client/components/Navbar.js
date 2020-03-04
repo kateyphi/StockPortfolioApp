@@ -9,13 +9,15 @@ const Navbar = ({handleClick, isLoggedIn, userEmail}) => (
     <nav>
       <h1>Stock Portfolio App</h1>
       <div>
-        <Link to="/home">Home</Link>
-        <Link to="/signin">Sign In</Link>
-        <Link to="/register">Register</Link>
-        <Link to="/buystocks">Buy Stocks</Link>
+      <Link to="/">Home</Link>
+        {isLoggedIn ? <> 
         <Link to="/transactions">Transactions</Link>
-        <Link to="/portfolio">Portfolio</Link>
-        <button type="button" onClick={handleClick}>Log Out</button>
+        <Link to="/portfolio">Portfolio</Link> 
+        <button type="button" onClick={handleClick}>Log Out</button> </>
+        : <>
+        <Link to="/signin">Sign In</Link>
+        <Link to="/register">Register</Link></>}
+
       </div>
     </nav>
     <hr />
