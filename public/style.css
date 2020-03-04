@@ -1,11 +1,58 @@
+body {
+    background-color: forestgreen;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+
 #stock-red {
-    color: red;
+    background-color: red;
 }
 
 #stock-grey {
-    color: grey
+    background-color: grey;
 }
 
 #stock-green {
-    color: green
+    background-color: green;
+}
+
+h1 {
+    margin: 20px;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.nav-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.link {
+    color: black;
+    margin: 20px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: grey;
+    text-decoration: none;
+}
+
+.portfolio {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+table {
+    background-color: beige;
+}
+
+td {
+    margin: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
 }

@@ -33,7 +33,7 @@ class PortfolioList extends React.Component {
         return (
         <div>
           <h3>Portfolio (${this.getTotal(this.props.stocks)})</h3>
-          <table>
+          <table className='table'>
           {Object.keys(this.props.stocks).map(x=>(
               <tr>
                   <td id={`stock-${this.getColor(x)}`}>{x.toUpperCase()}</td>

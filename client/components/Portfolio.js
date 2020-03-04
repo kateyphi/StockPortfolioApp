@@ -3,7 +3,7 @@ import BuyStocks from './BuyStocks'
 import PortfolioList from './PortfolioList'
 const Portfolio = () => {
     return (
-        <div>
+        <div className="portfolio">
             <PortfolioList />
             <BuyStocks />
         </div>

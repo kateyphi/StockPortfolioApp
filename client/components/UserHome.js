@@ -18,7 +18,9 @@ class UserHome extends React.Component{
     const {nickname} = this.props
     return (   
     <div>
-      <h3>Welcome, {nickname}</h3>
+      <h3>Welcome, {nickname}!</h3>
+      <p>Click on Transactions to view a list of all of the transactions you have made.</p>
+      <p>Click on Portfolio to view your stocks and see how they are doing. You can also buy new stocks!</p>
     </div>
 )
   }
