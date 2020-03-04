@@ -66,7 +66,6 @@ class PortfolioList extends React.Component {
 
 }
 
-
 const mapState = state => {
   return {
     id: state.user.id,
