@@ -2,7 +2,7 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 import {updateBalance} from './user'
 import { getStocks } from './stock'
-const alpha = require('alphavantage')({key: 'FI2XWT2RH1UR5UMR'})
+const alpha = require('alphavantage')({key: "FI2XWT2RH1UR5UMR"})
 
 
 const GET_ALL_ORDERS = 'GET_ALL_ORDERS'
