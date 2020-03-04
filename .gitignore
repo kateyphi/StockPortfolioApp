@@ -4,3 +4,4 @@ bundle.js.map
 secrets.js
 test.js
 app-env
+.env

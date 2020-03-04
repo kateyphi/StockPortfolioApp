@@ -8,6 +8,8 @@ const session = require('express-session')
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const dbStore = new SequelizeStore({db: db})
 const passport = require('passport')
+require('dotenv').config();
+
 dbStore.sync()
 
 passport.serializeUser((user,done)=>{
