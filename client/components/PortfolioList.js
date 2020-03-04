@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {getStocks} from '../store'
-import key from '../../secrets'
+const key = process.env.API_KEY
 const alpha = require('alphavantage')({key})
 
 class PortfolioList extends React.Component {
