@@ -6,7 +6,6 @@ class PortfolioList extends React.Component {
     constructor(props){
         super(props)
         this.getColor = this.getColor.bind(this)
-        this.setStocks = this.setStocks.bind(this)
         this.getTotal = this.getTotal.bind(this)
     }
 
