@@ -2,19 +2,15 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 import key from '../../secrets'
 import {updateBalance} from './user'
+import { getStocks } from './stock'
 const alpha = require('alphavantage')({key})
 
 
-const GET_ORDER = 'GET_ORDER'
 const GET_ALL_ORDERS = 'GET_ALL_ORDERS'
 const REMOVE_ORDERS = 'REMOVE_ORDERS'
 
 const defaultOrder = {}
 
-const getOrder = order => ({
-    type: GET_ORDER,
-    order
-})
 
 export const removeOrders = () => ({type: REMOVE_ORDERS})
 
@@ -24,16 +20,14 @@ const gotAllOrders = orders => ({
 })
 
 export const newOrder = (balance, symbol, quantity, userId) => async dispatch => {
-    console.log('symbol', symbol, 'quantity', quantity, 'userid', userId, 'balance', balance)
     try {
         let quote = await alpha.data.quote(symbol)
         let price = quote['Global Quote']['05. price']
-        console.log(price*quantity)
-        console.log(balance)
         if (price*quantity < balance){
             let res = await axios.post('/api/orders', {symbol, quantity, price, userId})
             // dispatch(getOrder(res.data))
             dispatch(updateBalance(userId, price*quantity))
+            location.reload()
         } else {
             Swal.fire('You do not have enough money for that transaction.')
         }

@@ -16,7 +16,6 @@ class BuyStocks extends React.Component {
         const userId = this.props.id
         const balance = this.props.balance
         this.props.newOrder(balance, symbol, quantity, userId)
-        this.props.getStocks()
     }
 
     render(){

@@ -9,6 +9,7 @@ router.get('/stocks', async function(req,res,next){
                 userId: req.user.id
             },
         })
+        console.log(stocks.data)
         res.json(stocks)
     } catch (error) {
         next(error)

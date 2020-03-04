@@ -5,7 +5,14 @@ const alpha = require('alphavantage')({key})
 const GET_STOCKS = 'GET_STOCKS'
 const REMOVE_STOCKS = 'REMOVE_STOCKS'
 
-const defaultStocks = {}
+const defaultStocks = {
+    loading: {
+        symbol: '',
+        price: 0,
+        openPrice: 0, 
+        qty: 0
+      }
+}
 
 const gotStocks = stocks => ({
     type: GET_STOCKS,
@@ -27,8 +34,6 @@ export const getStocks = () => async dispatch => {
             stocks[key]['openPrice'] =  quote['Global Quote']['02. open']
             stocks[key]['price'] = quote['Global Quote']['05. price']
         }
-        let stocksArr = Object.values(stocks)
-        stocks['total'] = stocksArr.map(x=>x.qty*x.price).reduce((a,b)=>a+b, 0)
         dispatch(gotStocks(stocks))
     } catch (error) {
         console.error(error)

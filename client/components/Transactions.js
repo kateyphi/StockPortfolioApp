@@ -13,7 +13,6 @@ class Transactions extends React.Component {
 
     render(){
         const orders = this.props.order
-        console.log(orders)
         return (
         <div>
           <h3>Transactions</h3>
