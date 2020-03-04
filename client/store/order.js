@@ -1,9 +1,8 @@
 import axios from 'axios'
 import Swal from 'sweetalert2'
-const key = process.env.API_KEY
 import {updateBalance} from './user'
 import { getStocks } from './stock'
-const alpha = require('alphavantage')({key})
+const alpha = require('alphavantage')({key: process.env.API_KEY})
 
 
 const GET_ALL_ORDERS = 'GET_ALL_ORDERS'

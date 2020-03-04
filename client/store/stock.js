@@ -1,6 +1,5 @@
 import axios from 'axios'
-const key = process.env.API_KEY
-const alpha = require('alphavantage')({key})
+const alpha = require('alphavantage')({key: process.env.API_KEY})
 
 const GET_STOCKS = 'GET_STOCKS'
 const REMOVE_STOCKS = 'REMOVE_STOCKS'
