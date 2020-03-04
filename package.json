@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server",
     "start-dev": "NODE_ENV='development' webpack -w & nodemon server -e html,js,scss --igonore public --ignore client",
-    "seed": "node script/seed.js"
+    "seed": "node script/seed.js",
+    "deploy": "script/deploy",
+    "heroku-postbuild": "webpack -p"
   },
   "author": "",
   "license": "ISC",
