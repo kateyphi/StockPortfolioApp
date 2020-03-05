@@ -7,3 +7,5 @@ export {default as Portfolio} from './Portfolio'
 export {default as PortfolioList} from './PortfolioList'
 export {default as Transactions} from './Transactions'
 export {default as Home} from './Home'
+
+// Exports all components from 'components/'. 

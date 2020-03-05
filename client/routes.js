@@ -5,10 +5,15 @@ import {Register, SignIn, UserHome, Portfolio, Transactions, Home} from './compo
 import {me, getAllOrders, getStocks} from './store'
 import PropTypes from 'prop-types'
 
+
+
 class Routes extends React.Component {
+    // Loads initial data (see mapDispatch below) as soon as Routes component mounts. 
     componentDidMount(){
         this.props.loadInitialData()
     }
+
+    // Available routers depend on whether user is logged in or not. Notice '/' routes to the UserHome component if logged in, while it routes to the Home component if not. 
     render(){
         const {isLoggedIn} = this.props
         return (
@@ -21,7 +26,7 @@ class Routes extends React.Component {
                     </Switch>
                 ) : (
                     <Switch>
-                        <Route exact path='/' component={Home} />
+                        <Route exact path="/" component={Home} />
                         <Route path="/signin" component={SignIn} />
                         <Route path="/register" component={Register} />
                     </Switch>
@@ -31,11 +36,15 @@ class Routes extends React.Component {
     }
 }
 
+// A user is logged in if state.user.id is defined. 
+
 const mapStateToProps = state => {
     return {
         isLoggedIn: !!state.user.id
     }
 }
+
+// Initial data to load: user info, all orders, and stocks. 
 
 const mapDispatchToProps = dispatch => {
     return {

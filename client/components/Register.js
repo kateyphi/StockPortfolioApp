@@ -2,6 +2,8 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {auth} from '../store'
 
+
+// Register form. On submit, see handleSubmit in mapDispatch at the bottom of this file. 
 const Register = (props) => {
     const {handleSubmit, error} = props
     return (
@@ -40,6 +42,7 @@ const mapStateToProps = state => {
     }
 }
 
+// When a user submits this form, this dispatches the 'auth' function from 'store/user.js' which creates a new user, signs them in, and loads initial data. 
 const mapDispatchToProps = dispatch => {
     return {
         handleSubmit(evt){

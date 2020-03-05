@@ -1,21 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {me, getAllOrders, getStocks} from '../store'
 
-/**
- * COMPONENT
- */
-class UserHome extends React.Component{
-  constructor(props){
-    super(props)
-  }
-  componentDidMount(){
-    this.props.loadInitialData()
-  }
 
-  render(){
-    const {nickname} = this.props
+// This component renders on the '/' route when a user is logged in. 
+const UserHome = (props)=> {
+    const {nickname} = props
     return (   
     <div>
       <h3>Welcome, {nickname}!</h3>
@@ -23,35 +13,19 @@ class UserHome extends React.Component{
       <p>Click on Portfolio to view your stocks and see how they are doing. You can also buy new stocks!</p>
     </div>
 )
-  }
-
-
 }
 
-/**
- * CONTAINER
- */
+// Maps the user's nickname to the component's props. 
 const mapState = state => {
   return {
     nickname: state.user.nickname
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-      loadInitialData(){
-          dispatch(me())
-          dispatch(getAllOrders())
-          dispatch(getStocks())
-      },
-      
-  }
-}
-export default connect(mapState, mapDispatchToProps)(UserHome)
 
-/**
- * PROP TYPES
- */
+export default connect(mapState)(UserHome)
+
+
 UserHome.propTypes = {
   email: PropTypes.string
 }

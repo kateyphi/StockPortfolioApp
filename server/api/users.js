@@ -3,6 +3,7 @@ const {User} = require('../db/models')
 const Sequelize = require('sequelize')
 
 
+// This router retrieves a user's balance. 
 router.get('/:userId/balance', async function(req,res,next){
     try {
         const balance = await User.findByPk(req.params.userId, {attributes: ['balance']})
@@ -12,17 +13,7 @@ router.get('/:userId/balance', async function(req,res,next){
     }
 })
 
-router.get('/', async function(req,res,next){
-    try {
-        const users = await User.findAll({
-            attributes: ['id', 'email']
-        })
-        res.json(users)
-    } catch (error) {
-        next(error)
-    }
-})
-
+// This router reduces the user's balance property by the amount that their transaction cost. 
 router.put('/balance', async function(req,res,next){
     try {
         const user = await User.update(

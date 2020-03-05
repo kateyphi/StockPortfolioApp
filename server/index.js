@@ -7,11 +7,11 @@ const db = require('./db/db.js')
 const session = require('express-session')
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const dbStore = new SequelizeStore({db: db})
-const passport = require('passport')
-require('dotenv').config();
-
 dbStore.sync()
+const passport = require('passport')
 
+
+// register users with passport 
 passport.serializeUser((user,done)=>{
     try {
         done(null, user.id)        
@@ -28,11 +28,17 @@ passport.deserializeUser(async (id,done)=>{
     }
 })
 
+//logging middleware
 app.use(morgan('dev'))
+
+// serves up static files 
 app.use(express.static(path.join(__dirname, '..','public')));
+
+//body parser
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
+// session middleware 
 app.use(session({
     secret: process.env.SESSION_SECRET || 'uh oh', 
     store: dbStore,
@@ -41,6 +47,8 @@ app.use(session({
 }))
 app.use(passport.initialize())
 app.use(passport.session())
+
+// sets up api routes 
 app.use('/auth', require('./auth'))
 app.use('/api', require('./api'))
 
@@ -57,7 +65,8 @@ app.use(function(err,req,res,next){
     res.status(err.status || 500).send(err.message || 'Internal server error.')
 })
 
+// sync database and start listening 
 db.sync().then(function(){app.listen(port, function(){
-    console.log(`Listening on port ${port}.`)
+    (`Listening on port ${port}.`)
     })
 })

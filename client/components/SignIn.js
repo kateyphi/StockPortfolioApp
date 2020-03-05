@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {auth} from '../store'
 
+// Sign in form. On submit, see handleSubmit in mapDispatch at the bottom of this file. 
 const SignIn = (props) => {
     const {handleSubmit, error} = props
     return (
@@ -34,6 +35,7 @@ const mapStateToProps = state => {
     }
 }
 
+// When a user submits this form, this dispatches the 'auth' function from 'store/user.js', which signs them in and then gets initial data. 
 const mapDispatchToProps = dispatch => {
     return {
         handleSubmit(evt){

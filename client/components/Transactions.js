@@ -2,15 +2,18 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {getAllOrders} from '../store'
 
+// This component renders a list of the user's transactions. 
 class Transactions extends React.Component {
     constructor(props){
         super(props)
     }
 
+    // Gets all orders when the component mounts. 
     componentDidMount(){
-        this.props.getAllOrders(this.props.id)
+        this.props.getAllOrders()
     }
 
+    // Maps the orders to a table displaying each order's symbol, number of shares bought, at what price they were bought, and on what date (cutting off the time info). 
     render(){
         const orders = this.props.order
         return (
@@ -31,17 +34,16 @@ class Transactions extends React.Component {
 
 }
 
-
+// Maps orders from redux store to props. 
 const mapState = state => {
   return {
-    id: state.user.id,
-    stocks: state.stock,
     order: state.order
   }
 }
 
+// Maps getAllOrders thunk to this component's props. 
 const mapDispatchToProps = dispatch => ({
-    getAllOrders: (userId) => dispatch(getAllOrders(userId))
+    getAllOrders: () => dispatch(getAllOrders())
   })
 
 export default connect(mapState, mapDispatchToProps)(Transactions)

@@ -2,6 +2,8 @@ const router = require('express').Router()
 const User = require('../db/models/user')
 module.exports = router
 
+
+// Sign in route. Finds the user with the entered email. If there is none, send first error. If there is a user with that name, check whether the password is correct and send 2nd error if not. Otherwise, login! 
 router.post('/signin', async (req, res, next)=>{
     try {
         const user = await User.findOne({
@@ -21,6 +23,8 @@ router.post('/signin', async (req, res, next)=>{
     }
 })
 
+// Register route. Creates new User instance and logs in. Sends error if user already exists. 
+
 router.post('/register', async (req,res,next)=>{
     try {
         const user = await User.create(req.body)
@@ -34,11 +38,15 @@ router.post('/register', async (req,res,next)=>{
     }
 })
 
+// Logout route. Logs out, destroys session, and redirects to the main page. 
+
 router.post('/logout', (req,res,next)=>{
     req.logout()
     req.session.destroy()
     res.redirect('/')
 })
+
+// Route to retrieve current user. 
 
 router.get('/me', (req,res)=>{
     res.json(req.user)

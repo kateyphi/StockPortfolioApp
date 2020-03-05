@@ -1,6 +1,8 @@
 const router = require('express').Router()
-const {User, Order} = require('../db/models')
+const {Order} = require('../db/models')
 
+
+// This router finds and sends back all orders with the current user's userId. 
 
 router.get('/stocks', async function(req,res,next){
     try {
@@ -9,13 +11,13 @@ router.get('/stocks', async function(req,res,next){
                 userId: req.user.id
             },
         })
-        console.log(stocks.data)
         res.json(stocks)
     } catch (error) {
         next(error)
     }
 })
 
+// This router creates a new order and sends it back. 
 
 router.post('/', async function(req,res,next){
     try {

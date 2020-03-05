@@ -1,6 +1,8 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
+
+// Define the order model. 
 const Order = db.define('order', {
     symbol: {
         type: Sequelize.STRING,

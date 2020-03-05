@@ -4,6 +4,8 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store/user'
 
+
+//The Navbar component displays the Home link to anyone. It displays the Transactions and Portfolio links if the user is logged in, and the Sign In and Register components if the user is not logged in. 
 const Navbar = ({handleClick, isLoggedIn}) => (
     <nav>
       <h1>Play the Mock Market</h1>
@@ -20,9 +22,8 @@ const Navbar = ({handleClick, isLoggedIn}) => (
     </nav>
 )
 
-/**
- * CONTAINER
- */
+
+// maps user info from redux store to this component's props. 
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
@@ -30,6 +31,7 @@ const mapState = state => {
   }
 }
 
+/// maps this handleClick method, which dispatches the logout function from 'store/user.js', to this component's props. 
 const mapDispatch = dispatch => {
     return {
       handleClick() {

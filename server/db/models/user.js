@@ -2,6 +2,8 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 const crypto = require('crypto')
 
+// Define the User model. Email must be unique. Encrypts password when user is created. 
+
 const User = db.define('user', {
     nickname: {
         type: Sequelize.STRING
@@ -13,6 +15,7 @@ const User = db.define('user', {
     },
     password: {
         type: Sequelize.STRING,
+        allowNull: false,
         get(){
             return ()=> this.getDataValue('password')
         }
@@ -34,6 +37,7 @@ const User = db.define('user', {
     }
 })
 
+// This method will check whether the password is correct when users sign in. 
 User.prototype.correctPassword = function(candidatePassword){
     return User.encryptPassword(candidatePassword, this.salt()) === this.password()
 }
